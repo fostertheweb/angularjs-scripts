@@ -27,9 +27,6 @@ switch (script) {
   default:
     console.log('Unknown script "' + script + '".');
     console.log('Perhaps you need to update angularjs-scripts?');
-    console.log(
-      'Email jonathan.foster@eagledream.com for more information.'
-    );
     break;
 }
 
