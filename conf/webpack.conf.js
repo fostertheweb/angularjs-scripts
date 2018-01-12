@@ -69,5 +69,11 @@ module.exports = {
     path: path.join(process.cwd(), conf.paths.tmp),
     filename: 'index.js'
   },
-  entry: `./${conf.path.src('index')}`
+  entry: `./${conf.path.src('index')}`,
+  resolveLoader: {
+    modules: [
+      conf.paths.ownNodeModules,
+      conf.paths.appNodeModules
+    ]
+  }
 };

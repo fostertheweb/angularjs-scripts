@@ -9,7 +9,15 @@
  */
 
 const path = require('path');
-const gutil = require('gulp-util');
+const log = require('fancy-log');
+const colors = require('ansi-colors');
+const fs = require('fs');
+
+// Make sure any symlinks in the project folder are resolved:
+// https://github.com/facebookincubator/create-react-app/issues/637
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
 exports.ngModule = 'app';
 
@@ -21,7 +29,9 @@ exports.paths = {
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  tasks: 'gulp_tasks'
+  tasks: 'gulp_tasks',
+  appNodeModules: resolveApp('node_modules'),
+  ownNodeModules: resolveOwn('node_modules')
 };
 
 /**
@@ -48,7 +58,7 @@ for (const pathName in exports.paths) {
  */
 exports.errorHandler = function (title) {
   return function (err) {
-    gutil.log(gutil.colors.red(`[${title}]`), err.toString());
+    log(colors.red(`[${title}]`), err.toString());
     this.emit('end');
   };
 };

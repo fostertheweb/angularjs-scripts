@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const gutil = require('gulp-util');
+const log = require('fancy-log');
 
 const webpack = require('webpack');
 const webpackConf = require('../conf/webpack.conf');
@@ -27,7 +27,7 @@ function webpackWrapper(watch, conf, done) {
     if (err) {
       gulpConf.errorHandler('Webpack')(err);
     }
-    gutil.log(stats.toString({
+    log(stats.toString({
       colors: true,
       chunks: false,
       hash: false,
