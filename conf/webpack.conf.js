@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const conf = require('./gulp.conf');
+const eslintConfig = require('./eslint.conf');
+const babelConfig = require('./babel.conf');
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -18,8 +20,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
-        enforce: 'pre'
+        enforce: 'pre',
+        use: [
+          {
+            options: {
+              eslintPath: require.resolve('eslint'),
+              baseConfig: {
+                extends: [eslintConfig]
+              },
+              ignore: false,
+              useEslintrc: false
+            },
+            loader: require.resolve('eslint-loader')
+          }
+        ],
+        include: conf.paths.appSrc
       },
       {
         test: /\.(css|scss)$/,
@@ -32,11 +47,17 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        include: conf.paths.appSrc,
         exclude: /node_modules/,
         loaders: [
-          'ng-annotate-loader',
-          'babel-loader'
-        ]
+          require.resolve('ng-annotate-loader'),
+          require.resolve('babel-loader')
+        ],
+        options: {
+          babelrc: false,
+          presets: [babelConfig],
+          cacheDirectory: true
+        }
       },
       {
         test: /\.html$/,

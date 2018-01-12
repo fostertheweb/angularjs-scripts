@@ -30,6 +30,7 @@ exports.paths = {
   tmp: '.tmp',
   e2e: 'e2e',
   tasks: 'gulp_tasks',
+  appSrc: resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveOwn('node_modules')
 };
