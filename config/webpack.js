@@ -18,25 +18,22 @@ module.exports = {
           require.resolve('json-loader')
         ]
       },
-      // {
-      //   test: /\.js$/,
-      //   include: paths.src,
-      //   exclude: /node_modules/,
-      //   enforce: 'pre',
-      //   use: [
-      //     {
-      //       loader: require.resolve('eslint-loader'),
-      //       options: {
-      //         eslintPath: require.resolve('eslint'),
-      //         baseConfig: {
-      //           extends: [eslintrc]
-      //         },
-      //         ignore: false,
-      //         useEslintrc: false
-      //       }
-      //     }
-      //   ]
-      // },
+      {
+        test: /\.js$/,
+        include: paths.src,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        use: {
+          loader: require.resolve('eslint-loader'),
+          options: {
+            eslintPath: require.resolve('eslint'),
+            useEslintrc: false,
+            baseConfig: eslintrc,
+            emitWarning: true,
+            failOnError: false
+          }
+        }
+      },
       {
         test: /\.(css|scss)$/,
         loaders: [

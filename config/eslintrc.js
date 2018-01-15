@@ -12,11 +12,15 @@ module.exports = {
     jasmine: true,
     es6: true
   },
-  extends: [
+  plugins: [
     'angular',
-    'xo-space/esnext'
-    // require.resolve('eslint-config-angular'),
-    // require.resolve('eslint-config-xo-space/esnext')
+    'babel'
+    // require.resolve('eslint-plugin-angular'),
+    // require.resolve('eslint-plugin-babel')
+  ],
+  extends: [
+    require.resolve('eslint-config-angular'),
+    require.resolve('eslint-config-xo-space/esnext')
   ],
   rules: {
     'arrow-parens': ['as-needed', {
