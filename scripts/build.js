@@ -16,10 +16,27 @@ const path = require('path');
 const webpackConf = require('../config/webpack.config.prod');
 
 webpack(webpackConf, (err, stats) => {
-  if (err || stats.hasErrors()) {
-    console.log(err);
+  if (err) {
+    console.error(err.stack || err);
+    if (err.details) {
+      console.error(err.details);
+    }
+    return;
   }
 
-  console.log(stats.toString({ colors: true }));
+  const info = stats.toJson();
+
+  if (stats.hasErrors()) {
+    console.error(info.errors);
+  }
+
+  if (stats.hasWarnings()) {
+    console.warn(info.warnings);
+  }
+
+  console.log(stats.toString({
+    chunks: false,
+    colors: true
+  }));
 });
 
