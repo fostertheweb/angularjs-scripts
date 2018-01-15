@@ -5,27 +5,27 @@ module.exports = {
       {
         test: /\.json$/,
         loaders: [
-          'json-loader'
+          require.resolve('json-loader')
         ]
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
+        loader: require.resolve('eslint-loader'),
         enforce: 'pre'
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
-          'ng-annotate-loader',
-          'babel-loader'
+          require.resolve('ng-annotate-loader'),
+          require.resolve('babel-loader')
         ]
       },
       {
         test: /\.html$/,
         loaders: [
-          'html-loader'
+          require.resolve('html-loader')
         ]
       }
     ]

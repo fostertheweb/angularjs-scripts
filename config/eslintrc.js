@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
   globals: {
     expect: true
   },
@@ -13,9 +15,11 @@ module.exports = {
   extends: [
     'angular',
     'xo-space/esnext'
+    // require.resolve('eslint-config-angular'),
+    // require.resolve('eslint-config-xo-space/esnext')
   ],
   rules: {
-    'arrow-parens': [ 'as-needed', {
+    'arrow-parens': ['as-needed', {
       requireForBlockBody: true
     }]
   }
