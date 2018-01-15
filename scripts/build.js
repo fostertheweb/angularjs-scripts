@@ -10,3 +10,16 @@ process.env.NODE_ENV = 'production';
 process.on('unhandledRejection', err => {
   throw err;
 });
+
+const webpack = require('webpack');
+const path = require('path');
+const webpackConf = require('../config/webpack.config.prod');
+
+webpack(webpackConf, (err, stats) => {
+  if (err || stats.hasErrors()) {
+    console.log(err);
+  }
+
+  console.log(stats.toString({ colors: true }));
+});
+

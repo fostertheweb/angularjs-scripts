@@ -16,7 +16,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const path = require('path');
 const chalk = require('chalk');
 const port = 4000;
-const webpackConf = require('../config/webpack');
+const webpackConf = require('../config/webpack.config.dev');
 
 const options = {
   hot: true,

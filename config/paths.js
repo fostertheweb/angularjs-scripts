@@ -14,6 +14,7 @@ module.exports = {
   root: appDirectory,
   src: resolveApp('src'),
   dist: resolveApp('dist'),
+  appPkg: resolveApp('package.json'),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveOwn('node_modules')
 };

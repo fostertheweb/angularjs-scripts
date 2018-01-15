@@ -1,13 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 // config files
+const paths = require('./paths');
+const appPkg = require(paths.appPkg);
 const eslintrc = require('./eslintrc');
 const babelrc = require('./babelrc');
-const karmaConfig = require('./karma');
-const paths = require('./paths');
 
 module.exports = {
   module: {
@@ -36,12 +37,23 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: [
-          require.resolve('style-loader'),
-          require.resolve('css-loader'),
-          require.resolve('sass-loader'),
-          require.resolve('postcss-loader')
-        ]
+        loaders: ExtractTextPlugin.extract({
+          fallback: require.resolve('style-loader'),
+          use: [
+            {
+              loader: require.resolve('css-loader'),
+              options: {
+                minimize: true
+              }
+            },
+            {
+              loader: require.resolve('sass-loader')
+            },
+            {
+              loader: require.resolve('postcss-loader')
+            }
+          ]
+        })
       },
       {
         test: /\.js$/,
@@ -82,17 +94,25 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.src, 'index.html')
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
+    }),
+    new ExtractTextPlugin('index-[contenthash].css'),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer]
-      },
-      debug: true
+      }
     })
   ],
-  devtool: 'source-map',
   output: {
-    path: path.join(process.cwd(), paths.dist),
-    filename: 'index.js'
+    path: paths.dist,
+    filename: '[name]-[hash].js'
   },
-  entry: path.join(paths.src, 'index')
+  entry: {
+    app: path.join(paths.src, 'index'),
+    vendor: Object.keys(appPkg.dependencies)
+  }
 };
+

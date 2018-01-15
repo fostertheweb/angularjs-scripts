@@ -9,7 +9,7 @@ const html = path.join(paths.src, '**/*.html');
 module.exports = function (options) {
   const configuration = {
     basePath: paths.root,
-    singleRun: true, // do the math
+    singleRun: true,
     autoWatch: false,
     logLevel: 'INFO',
     junitReporter: {
@@ -42,7 +42,7 @@ module.exports = function (options) {
       type: 'html',
       dir: 'coverage/'
     },
-    webpack: require('./webpack-test.conf'),
+    webpack: require('./webpack.config.dev.conf'),
     webpackMiddleware: {
       noInfo: true
     },
@@ -59,3 +59,4 @@ module.exports = function (options) {
 
   options.set(configuration);
 };
+

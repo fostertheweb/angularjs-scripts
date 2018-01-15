@@ -15,8 +15,6 @@ module.exports = {
   plugins: [
     'angular',
     'babel'
-    // require.resolve('eslint-plugin-angular'),
-    // require.resolve('eslint-plugin-babel')
   ],
   extends: [
     require.resolve('eslint-config-angular'),
@@ -28,3 +26,4 @@ module.exports = {
     }]
   }
 };
+
