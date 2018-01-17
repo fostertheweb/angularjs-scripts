@@ -6,6 +6,8 @@ const path = require('path');
 const entry = path.join(paths.src, 'index.spec.js');
 const html = path.join(paths.src, '**/*.html');
 
+process.env.NODE_ENV = 'development';
+
 module.exports = function (options) {
   const configuration = {
     basePath: paths.root,
@@ -22,7 +24,8 @@ module.exports = function (options) {
       'jasmine'
     ],
     files: [
-      'node_modules/es6-shim/es6-shim.js',
+      require.resolve('es6-shim/es6-shim'),
+      // 'node_modules/es6-shim/es6-shim.js',
       entry,
       html,
     ],
@@ -42,7 +45,7 @@ module.exports = function (options) {
       type: 'html',
       dir: 'coverage/'
     },
-    webpack: require('./webpack.config.dev.conf'),
+    webpack: require('./webpack.config.dev'),
     webpackMiddleware: {
       noInfo: true
     },
