@@ -16,24 +16,25 @@ const WebpackDevServer = require('webpack-dev-server');
 const path = require('path');
 const chalk = require('chalk');
 const port = 4000;
-const webpackConf = require('../config/webpack.config.dev');
+const config = require('../config/webpack.config.dev');
+const paths = require('../config/paths');
 
 const options = {
   hot: true,
   inline: true,
+  historyApiFallback: true,
+  overlay: true,
   stats: {
     colors: true
-  }
+  },
 };
 
-const server = new WebpackDevServer(webpack(webpackConf), options);
+const server = new WebpackDevServer(webpack(config), options);
 
 server.listen(port, 'localhost', err => {
   if (err) {
     console.log(chalk.red(err))
   }
-
-  console.log(chalk.cyan(`Development server running on port ${chalk.white.bold(port)}\n`));
 });
 
 ['SIGINT', 'SIGTERM'].forEach(signal => {

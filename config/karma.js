@@ -25,7 +25,6 @@ module.exports = function (options) {
     ],
     files: [
       require.resolve('es6-shim/es6-shim'),
-      // 'node_modules/es6-shim/es6-shim.js',
       entry,
       html,
     ],

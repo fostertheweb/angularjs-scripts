@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // config files
 const eslintrc = require('./eslintrc');
@@ -44,12 +45,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: paths.src,
-        exclude: /node_modules/,
         use: [
-          {
-            loader: require.resolve('ng-annotate-loader'),
-          },
           {
             loader: require.resolve('babel-loader'),
             options: {
@@ -86,6 +82,12 @@ module.exports = {
         postcss: () => [autoprefixer]
       },
       debug: true
+    }),
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      proxy: 'http://localhost:4000/',
+      reload: false
     })
   ],
   devtool: 'source-map',

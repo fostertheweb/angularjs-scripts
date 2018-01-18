@@ -12,10 +12,15 @@ process.on('unhandledRejection', err => {
 });
 
 const webpack = require('webpack');
+const fs = require('fs-extra');
 const path = require('path');
-const webpackConf = require('../config/webpack.config.prod');
+const paths = require('../config/paths');
+const config = require('../config/webpack.config.prod');
 
-webpack(webpackConf, (err, stats) => {
+// empty the build folder
+fs.emptyDirSync(paths.dist);
+
+webpack(config, (err, stats) => {
   if (err) {
     console.error(err.stack || err);
     if (err.details) {
@@ -24,19 +29,12 @@ webpack(webpackConf, (err, stats) => {
     return;
   }
 
-  const info = stats.toJson();
-
-  if (stats.hasErrors()) {
-    console.error(info.errors);
-  }
-
-  if (stats.hasWarnings()) {
-    console.warn(info.warnings);
-  }
-
   console.log(stats.toString({
+    assets: true,
     chunks: false,
-    colors: true
+    children: false,
+    colors: true,
+    hash: false
   }));
 });
 

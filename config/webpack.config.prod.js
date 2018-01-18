@@ -6,9 +6,9 @@ const autoprefixer = require('autoprefixer');
 
 // config files
 const paths = require('./paths');
-const appPkg = require(paths.appPkg);
 const eslintrc = require('./eslintrc');
 const babelrc = require('./babelrc');
+const appPkg = require(paths.appPkg);
 
 module.exports = {
   module: {
@@ -58,17 +58,27 @@ module.exports = {
       {
         test: /\.js$/,
         include: paths.src,
-        exclude: /node_modules/,
         use: [
-          {
-            loader: require.resolve('ng-annotate-loader'),
-          },
           {
             loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
               presets: [babelrc],
-              cacheDirectory: true
+              compact: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              babelrc: false,
+              presets: [babelrc],
+              cacheDirectory: true,
+              compact: false
             }
           }
         ]
@@ -99,7 +109,6 @@ module.exports = {
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     }),
     new ExtractTextPlugin('index-[contenthash].css'),
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer]
@@ -110,9 +119,6 @@ module.exports = {
     path: paths.dist,
     filename: '[name]-[hash].js'
   },
-  entry: {
-    app: path.join(paths.src, 'index'),
-    vendor: Object.keys(appPkg.dependencies)
-  }
+  entry:  path.join(paths.src, 'index')
 };
 
