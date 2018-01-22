@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 // config files
 const eslintrc = require('./eslintrc');
@@ -57,12 +58,21 @@ module.exports = {
         loaders: [
           require.resolve('html-loader')
         ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif)$/,
+        loader: require.resolve('file-loader'),
+        options: {
+          name: 'assets/[name].[ext]'
+        }
       }
     ]
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      options: {},
+      options: {
+        postcss: () => [autoprefixer]
+      },
       debug: true
     }),
   ],

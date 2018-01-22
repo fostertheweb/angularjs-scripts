@@ -21,11 +21,12 @@ const karmaCallback = (exitCode) => {
   process.exit(exitCode);
 };
 
-const overrideConfig = (singleRun) => {
+const overrideConfig = (singleRun = false) => {
+  console.log(singleRun)
   return cfg.parseConfig(require.resolve('../config/karma'), {
     singleRun,
     autoWatch: !singleRun
-  })
+  });
 };
 
 // Watch unless on CI or in coverage mode
