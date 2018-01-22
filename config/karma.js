@@ -44,7 +44,7 @@ module.exports = function (options) {
       type: 'html',
       dir: 'coverage/'
     },
-    webpack: require('./webpack.config.dev'),
+    webpack: require('./webpack.config.test'),
     webpackMiddleware: {
       noInfo: true
     },
