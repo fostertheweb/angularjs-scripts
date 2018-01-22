@@ -22,7 +22,6 @@ const karmaCallback = (exitCode) => {
 };
 
 const overrideConfig = (singleRun = false) => {
-  console.log(singleRun)
   return cfg.parseConfig(require.resolve('../config/karma'), {
     singleRun,
     autoWatch: !singleRun

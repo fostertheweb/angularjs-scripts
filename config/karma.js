@@ -46,6 +46,13 @@ module.exports = function (options) {
     },
     webpack: require('./webpack.config.test'),
     webpackMiddleware: {
+      stats: {
+        assets: false,
+        children: false,
+        chunks: false,
+        modules: false,
+        warnings: false
+      },
       noInfo: true
     },
     plugins: [

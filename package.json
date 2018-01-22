@@ -1,6 +1,6 @@
 {
   "name": "angularjs-scripts",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "dependencies": {
     "autoprefixer": "^6.7.3",
     "babel-core": "^6.23.1",

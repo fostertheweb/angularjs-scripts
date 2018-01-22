@@ -51,7 +51,8 @@ module.exports = {
             options: {
               babelrc: false,
               presets: [babelrc],
-              cacheDirectory: true
+              cacheDirectory: true,
+              compact: true
             }
           }
         ]
