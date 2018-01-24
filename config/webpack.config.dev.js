@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const DotenvPlugin = require('dotenv-webpack');
 
 // config files
 const eslintrc = require('./eslintrc');
@@ -75,6 +76,11 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new DotenvPlugin({
+      path: paths.root,
+      safe: true,
+      slient: true
+    }),
     new HtmlWebpackPlugin({
       template: path.join(paths.src, 'index.html')
     }),
