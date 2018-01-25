@@ -1,6 +1,6 @@
 {
   "name": "angularjs-scripts",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "Jonathan Foster <jonathan.foster@eagledream.com>",
   "license": "MIT",
   "dependencies": {
