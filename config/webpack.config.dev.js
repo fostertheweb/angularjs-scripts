@@ -78,7 +78,6 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new DotenvPlugin({
       path: paths.root,
-      safe: true,
       slient: true
     }),
     new HtmlWebpackPlugin({
