@@ -64,7 +64,7 @@ module.exports = {
             options: {
               babelrc: false,
               presets: [babelrc],
-              compact: true
+              compact: false
             }
           }
         ]

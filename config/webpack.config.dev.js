@@ -53,7 +53,7 @@ module.exports = {
               babelrc: false,
               presets: [babelrc],
               cacheDirectory: true,
-              compact: true
+              compact: false
             }
           }
         ]
