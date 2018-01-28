@@ -12,8 +12,6 @@ process.on('unhandledRejection', err => {
 });
 
 const karma = require('karma');
-const path = require('path');
-const paths = require('../config/paths');
 const cfg = require('karma').config;
 
 const karmaCallback = (exitCode) => {

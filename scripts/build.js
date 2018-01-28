@@ -13,7 +13,6 @@ process.on('unhandledRejection', err => {
 
 const webpack = require('webpack');
 const fs = require('fs-extra');
-const path = require('path');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.prod');
 

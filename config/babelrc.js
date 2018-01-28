@@ -2,7 +2,7 @@
 
 const envOptions = {
   targets: {
-    ie: 10
+    ie: 11
   }
 };
 
@@ -11,7 +11,6 @@ module.exports = {
     [require.resolve('babel-preset-env'), envOptions]
   ],
   plugins: [
-    require.resolve('babel-plugin-transform-object-rest-spread'),
     [require.resolve('babel-plugin-angularjs-annotate'), {
       explicitOnly: true
     }]

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const DotenvPlugin = require('dotenv-webpack');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 // config files
 const eslintrc = require('./eslintrc');
@@ -74,10 +75,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new FriendlyErrorsWebpackPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new DotenvPlugin({
-      path: paths.root,
+      path: path.join(paths.root, '.env'),
       slient: true
     }),
     new HtmlWebpackPlugin({

@@ -13,23 +13,23 @@ process.on('unhandledRejection', err => {
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const path = require('path');
 const chalk = require('chalk');
 const port = 4000;
 const config = require('../config/webpack.config.dev');
 const paths = require('../config/paths');
 
 const options = {
-  hot: true,
-  inline: true,
   historyApiFallback: true,
   overlay: true,
+  quiet: true,
   stats: {
     colors: true
-  },
+  }
 };
 
 const server = new WebpackDevServer(webpack(config), options);
+
+console.log(`Loading application in ${chalk.cyan(process.cwd())}...`);
 
 server.listen(port, 'localhost', err => {
   if (err) {

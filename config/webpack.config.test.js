@@ -69,8 +69,7 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer]
-      },
-      debug: true
+      }
     }),
   ],
   devtool: 'source-map'
