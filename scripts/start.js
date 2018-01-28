@@ -19,6 +19,7 @@ const config = require('../config/webpack.config.dev');
 const paths = require('../config/paths');
 
 const options = {
+  inline: true,
   historyApiFallback: true,
   overlay: true,
   quiet: true,
