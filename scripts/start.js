@@ -21,6 +21,7 @@ const paths = require('../config/paths');
 const options = {
   inline: true,
   historyApiFallback: true,
+  hot: true,
   overlay: true,
   quiet: true,
   stats: {

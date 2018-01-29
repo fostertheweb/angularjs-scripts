@@ -47,6 +47,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: require.resolve('babel-loader'),
@@ -75,6 +76,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsWebpackPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
