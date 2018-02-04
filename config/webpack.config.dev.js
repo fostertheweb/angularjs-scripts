@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const DotenvPlugin = require('dotenv-webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -97,12 +96,6 @@ module.exports = {
         postcss: () => [autoprefixer]
       },
       debug: true
-    }),
-    new BrowserSyncPlugin({
-      host: 'localhost',
-      port: 3000,
-      proxy: 'http://localhost:4000/',
-      reload: false
     })
   ],
   devtool: 'source-map',

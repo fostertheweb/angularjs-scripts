@@ -1,6 +1,6 @@
 {
   "name": "angularjs-scripts",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "author": "Jonathan Foster <jonathan.foster@eagledream.com>",
   "license": "MIT",
   "dependencies": {
@@ -19,6 +19,7 @@
     "chalk": "^2.3.0",
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.26.1",
+    "detect-port-alt": "^1.1.5",
     "dotenv-webpack": "^1.5.4",
     "es6-shim": "^0.35.3",
     "eslint": "^3.15.0",

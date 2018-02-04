@@ -13,36 +13,57 @@ process.on('unhandledRejection', err => {
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const chalk = require('chalk');
-const port = 4000;
 const config = require('../config/webpack.config.dev');
 const paths = require('../config/paths');
+const detect = require('detect-port-alt');
 
-const options = {
-  inline: true,
-  historyApiFallback: true,
-  hot: true,
-  overlay: true,
-  quiet: true,
-  stats: {
-    colors: true
-  }
-};
+const localhost = 'localhost';
+const devServerPort = detect(4200, localhost);
+const browserSyncPort = detect(3000, localhost);
 
-const server = new WebpackDevServer(webpack(config), options);
+function configureWebpackDevServer(plugin) {
+  return new WebpackDevServer(webpack({
+    ...config,
+    plugins: [...config.plugins, plugin]
+  }), {
+    inline: true,
+    historyApiFallback: true,
+    hot: true,
+    overlay: true,
+    quiet: true,
+    stats: {
+      colors: true
+    }
+  })
+}
 
-console.log(`Loading application in ${chalk.cyan(process.cwd())}...`);
+function startServer() {
+  return Promise.all([
+    devServerPort,
+    browserSyncPort
+  ]).then((values) => {
+    const server = configureWebpackDevServer(new BrowserSyncPlugin({
+      host: 'localhost',
+      port: values[1],
+      proxy: `http://localhost:${values[0]}/`,
+      reload: false
+    }));
 
-server.listen(port, 'localhost', err => {
-  if (err) {
-    console.log(chalk.red(err))
-  }
-});
+    server.listen(values[0], 'localhost', err => {
+      if (err) {
+        console.log(chalk.red(err))
+      }
+    });
 
-['SIGINT', 'SIGTERM'].forEach(signal => {
-  process.on(signal, () => {
-    server.close();
-    process.exit();
+    ['SIGINT', 'SIGTERM'].forEach(signal => {
+      process.on(signal, () => {
+        server.close();
+        process.exit();
+      });
+    });
   });
-});
+}
 
+startServer();
