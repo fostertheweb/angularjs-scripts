@@ -5,10 +5,12 @@ const autoprefixer = require('autoprefixer');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const DotenvPlugin = require('dotenv-webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 // config files
 const eslintrc = require('./eslintrc');
 const babelrc = require('./babelrc');
+const stylelintConfig = require('./stylelint.config');
 const paths = require('./paths');
 
 module.exports = {
@@ -38,7 +40,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: [
+        use: [
           require.resolve('style-loader'),
           require.resolve('css-loader'),
           require.resolve('sass-loader'),
@@ -86,6 +88,9 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(paths.src, 'index.html')
+    }),
+    new StyleLintPlugin({
+      config: require('./stylelint.config')
     }),
     new webpack.LoaderOptionsPlugin({
       options: {

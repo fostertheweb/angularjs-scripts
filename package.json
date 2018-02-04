@@ -1,6 +1,6 @@
 {
   "name": "angularjs-scripts",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "author": "Jonathan Foster <jonathan.foster@eagledream.com>",
   "license": "MIT",
   "dependencies": {
@@ -51,12 +51,18 @@
     "source-map": "^0.7.0",
     "spawn-sync": "^1.0.15",
     "style-loader": "^0.13.1",
+    "stylelint": "^8.4.0",
+    "stylelint-config-sass-guidelines": "^4.1.0",
+    "stylelint-formatter-pretty": "^1.0.3",
+    "stylelint-order": "^0.8.0",
+    "stylelint-scss": "^2.3.0",
+    "stylelint-webpack-plugin": "^0.10.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1"
   },
   "devDependencies": {
     "@uirouter/angularjs": "1.0.12",
-    "angular": "^1.6.2"
+    "angular": "^1.6.9"
   },
   "engines": {
     "node": ">=6"
