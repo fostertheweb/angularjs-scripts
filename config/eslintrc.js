@@ -23,7 +23,7 @@ module.exports = {
   rules: {
     'arrow-parens': ['as-needed', {
       requireForBlockBody: true
-    }]
+    }],
+    'angular/no-service-method': 1
   }
 };
-

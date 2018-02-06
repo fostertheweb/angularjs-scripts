@@ -19,10 +19,6 @@ const config = require('../config/webpack.config.dev');
 const paths = require('../config/paths');
 const detect = require('detect-port-alt');
 
-const localhost = 'localhost';
-const devServerPort = detect(4200, localhost);
-const browserSyncPort = detect(3000, localhost);
-
 function configureWebpackDevServer(plugin) {
   return new WebpackDevServer(webpack({
     ...config,
@@ -39,19 +35,23 @@ function configureWebpackDevServer(plugin) {
   })
 }
 
+const host = 'localhost';
+const devServerPort = detect(4200, host);
+const browserSyncPort = detect(3000, host);
+
 function startServer() {
   return Promise.all([
     devServerPort,
     browserSyncPort
-  ]).then((values) => {
+  ]).then((ports) => {
     const server = configureWebpackDevServer(new BrowserSyncPlugin({
-      host: 'localhost',
-      port: values[1],
-      proxy: `http://localhost:${values[0]}/`,
+      host,
+      port: ports[1],
+      proxy: `http://${host}:${ports[0]}/`,
       reload: false
     }));
 
-    server.listen(values[0], 'localhost', err => {
+    server.listen(ports[0], host, err => {
       if (err) {
         console.log(chalk.red(err))
       }

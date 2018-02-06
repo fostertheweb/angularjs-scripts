@@ -105,4 +105,3 @@ module.exports = {
   },
   entry: path.join(paths.src, 'index')
 };
-
