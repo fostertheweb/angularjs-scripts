@@ -103,5 +103,5 @@ module.exports = {
     path: paths.dist,
     filename: 'index.js'
   },
-  entry: path.join(paths.src, 'index')
+  entry: path.join(paths.src, 'app', 'app.module')
 };

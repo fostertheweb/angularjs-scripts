@@ -8,6 +8,7 @@ module.exports = {
   plugins: [
     [require.resolve('babel-plugin-angularjs-annotate'), {
       explicitOnly: true
-    }]
+    }],
+    require.resolve('babel-plugin-istanbul')
   ]
 };

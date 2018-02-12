@@ -3,7 +3,7 @@
 const paths = require('./paths');
 const path = require('path');
 
-const entry = path.join(paths.src, 'index.spec.js');
+const entry = path.join(paths.src, 'app', 'app.module.spec.js');
 const html = path.join(paths.src, '**/*.html');
 
 process.env.NODE_ENV = 'development';
@@ -57,6 +57,7 @@ module.exports = function (options) {
     },
     plugins: [
       require.resolve('karma-jasmine'),
+      require.resolve('browserify-istanbul'),
       require.resolve('karma-junit-reporter'),
       require.resolve('karma-coverage'),
       require.resolve('karma-phantomjs-launcher'),
