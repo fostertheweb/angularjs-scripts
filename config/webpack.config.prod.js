@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const DotenvPlugin = require('dotenv-webpack');
 
 // config files
 const paths = require('./paths');
@@ -101,6 +102,10 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new DotenvPlugin({
+      path: path.join(paths.root, '.env'),
+      slient: true
+    }),
     new HtmlWebpackPlugin({
       template: path.join(paths.src, 'index.html')
     }),
@@ -119,6 +124,6 @@ module.exports = {
     path: paths.dist,
     filename: '[name]-[hash].js'
   },
-  entry:  path.join(paths.src, 'index')
+  entry:  path.join(paths.src, 'app', 'app.module')
 };
 
