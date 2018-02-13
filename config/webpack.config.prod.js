@@ -104,6 +104,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new DotenvPlugin({
       path: path.join(paths.root, '.env'),
+      systemvars: true,
       slient: true
     }),
     new HtmlWebpackPlugin({
