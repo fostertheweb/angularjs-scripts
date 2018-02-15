@@ -3,7 +3,7 @@
 const paths = require('./paths');
 const path = require('path');
 
-const entry = path.join(paths.src, 'app', 'app.module.spec.js');
+const entry = path.join(paths.src, 'index.spec.js');
 const html = path.join(paths.src, '**/*.html');
 
 process.env.NODE_ENV = 'development';
