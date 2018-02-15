@@ -119,6 +119,9 @@ module.exports = {
       options: {
         postcss: () => [autoprefixer]
       }
+    }),
+    new webpack.ProvidePlugin({
+      'window.jQuery': 'jquery'
     })
   ],
   output: {
