@@ -24,6 +24,6 @@ module.exports = {
     'arrow-parens': ['as-needed', {
       requireForBlockBody: true
     }],
-    'angular/no-service-method': 1
+    'angular/no-service-method': 0
   }
 };

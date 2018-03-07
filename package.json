@@ -1,7 +1,7 @@
 {
   "name": "angularjs-scripts",
-  "version": "0.5.7",
-  "author": "Jonathan Foster <jonathan.foster@eagledream.com>",
+  "version": "0.5.8",
+  "author": "Jonathan Foster <jxf9099@rit.edu>",
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^7.2.5",
@@ -55,7 +55,7 @@
     "spawn-sync": "^1.0.15",
     "style-loader": "^0.13.1",
     "stylelint": "^8.4.0",
-    "stylelint-config-sass-guidelines": "^4.1.0",
+    "stylelint-config-sass-guidelines": "^4.2.0",
     "stylelint-formatter-pretty": "^1.0.3",
     "stylelint-order": "^0.8.0",
     "stylelint-scss": "^2.3.0",
