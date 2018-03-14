@@ -1,6 +1,6 @@
 {
   "name": "angularjs-scripts",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "author": "Jonathan Foster <jxf9099@rit.edu>",
   "license": "MIT",
   "dependencies": {
