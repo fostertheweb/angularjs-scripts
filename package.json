@@ -10,6 +10,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-plugin-istanbul": "^4.0.0",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
