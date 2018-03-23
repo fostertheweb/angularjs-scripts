@@ -94,7 +94,7 @@ module.exports = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif)$/,
         loader: require.resolve('file-loader'),
         options: {
-          name: 'assets/[name].[ext]'
+          name: 'static/media/[name].[ext]'
         }
       }
     ]
