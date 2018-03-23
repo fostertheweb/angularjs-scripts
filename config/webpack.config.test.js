@@ -48,7 +48,13 @@ module.exports = {
             loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
-              presets: [babelrc],
+              presets: [{
+                ...babelrc,
+                plugins: [
+                  ...babelrc.plugins,
+                  require.resolve('babel-plugin-rewire')
+                ]
+              }],
               cacheDirectory: true
             }
           }
