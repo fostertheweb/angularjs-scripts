@@ -13,28 +13,30 @@ const stylelintConfig = require('./stylelint.config');
 const paths = require('./paths');
 
 module.exports = {
+  mode: "development",
+  entry: path.join(paths.src, 'app', 'app.module'),
+  output: {
+    path: paths.dist,
+    filename: 'index.js'
+  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.json$/,
-        loaders: [
-          require.resolve('json-loader')
-        ]
+        loader: require.resolve('json-loader')
       },
       {
         test: /\.js$/,
         include: paths.src,
         exclude: /node_modules/,
         enforce: 'pre',
-        use: {
-          loader: require.resolve('eslint-loader'),
-          options: {
-            eslintPath: require.resolve('eslint'),
-            useEslintrc: false,
-            baseConfig: eslintrc,
-            emitWarning: true,
-            failOnError: false
-          }
+        loader: require.resolve('eslint-loader'),
+        options: {
+          eslintPath: require.resolve('eslint'),
+          useEslintrc: false,
+          baseConfig: eslintrc,
+          emitWarning: true,
+          failOnError: false
         }
       },
       {
@@ -43,29 +45,30 @@ module.exports = {
           require.resolve('style-loader'),
           require.resolve('css-loader'),
           require.resolve('sass-loader'),
-          require.resolve('postcss-loader')
-        ]
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              plugins: () => [require('autoprefixer')({
+                  'browsers': ['> 1%', 'last 2 versions']
+              })],
+            }
+          }
+        ],
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: require.resolve('babel-loader'),
-            options: {
-              babelrc: false,
-              presets: [babelrc],
-              cacheDirectory: true,
-              compact: false
-            }
-          }
-        ]
+        loader: require.resolve('babel-loader'),
+        options: {
+          babelrc: false,
+          presets: [babelrc],
+          cacheDirectory: true,
+          compact: false
+        }
       },
       {
         test: /\.html$/,
-        loaders: [
-          require.resolve('html-loader')
-        ]
+        loader: require.resolve('html-loader')
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif)$/,
@@ -76,8 +79,8 @@ module.exports = {
       }
     ]
   },
+  devtool: "source-map",
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsWebpackPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -91,22 +94,10 @@ module.exports = {
     new StyleLintPlugin({
       config: require('./stylelint.config')
     }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: () => [autoprefixer]
-      },
-      debug: true
-    }),
     new webpack.ProvidePlugin({
       '$': require.resolve('jquery'),
       jQuery: require.resolve('jquery'),
       'window.jQuery': require.resolve('jquery')
     })
-  ],
-  devtool: 'source-map',
-  output: {
-    path: paths.dist,
-    filename: 'index.js'
-  },
-  entry: path.join(paths.src, 'app', 'app.module')
+  ]
 };

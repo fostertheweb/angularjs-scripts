@@ -10,7 +10,6 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
 module.exports = {
-  tmp: resolveApp('.tmp'),
   root: appDirectory,
   src: resolveApp('src'),
   dist: resolveApp('dist'),
