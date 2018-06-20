@@ -1,15 +1,14 @@
 const webpack = require("webpack");
-const webpackConf = require("./webpack.config");
+const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // config files
 const paths = require("./paths");
+const webpackConf = require("./base.config");
 
-module.exports = {
+module.exports = merge(webpackConf, {
   module: {
-    ...webpackConf.module,
-    loaders: [
-      ...webpackConf.module.loaders,
+    rules: [
       {
         test: /\.(css|scss)$/,
         loaders: ExtractTextPlugin.extract({
@@ -33,7 +32,6 @@ module.exports = {
     ]
   },
   plugins: [
-    ...webpackConf.module.plugins,
     new webpack.optimize.UglifyJsPlugin({
       output: { comments: false },
       compress: { unused: true, dead_code: true, warnings: false } // eslint-disable-line camelcase
@@ -44,4 +42,4 @@ module.exports = {
     path: paths.dist,
     filename: "[name]-[hash].js"
   }
-};
+});

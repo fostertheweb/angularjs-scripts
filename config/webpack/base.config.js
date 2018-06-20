@@ -5,14 +5,14 @@ const autoprefixer = require("autoprefixer");
 const DotenvPlugin = require("dotenv-webpack");
 
 // config files
-const eslintrc = require("./eslintrc");
-const babelrc = require("./babelrc");
-const stylelintConfig = require("./stylelint.config");
-const paths = require("./paths");
+const eslintrc = require("../eslintrc");
+const babelrc = require("../babelrc");
+const stylelintConfig = require("../stylelint.config");
+const paths = require("../paths");
 
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         include: paths.src,
@@ -35,7 +35,12 @@ module.exports = {
           require.resolve("style-loader"),
           require.resolve("css-loader"),
           require.resolve("sass-loader"),
-          require.resolve("postcss-loader")
+          {
+            loader: require.resolve("postcss-loader"),
+            options: {
+              plugins: loader => [require("autoprefixer")()]
+            }
+          }
         ]
       },
       {
@@ -75,12 +80,6 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(paths.src, "index.html")
-    }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: () => [autoprefixer]
-      },
-      debug: true
     }),
     new webpack.ProvidePlugin({
       $: require.resolve("jquery"),

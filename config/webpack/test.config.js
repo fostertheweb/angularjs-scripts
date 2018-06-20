@@ -1,13 +1,12 @@
-const webpackConf = require("./webpack.config");
+const merge = require('webpack-merge')
 
 // config files
-const babelrc = require("./babelrc");
+const babelrc = require("../babelrc");
+const webpackConf = require("./base.config");
 
-module.exports = {
+module.exports = merge(webpackConf, {
   module: {
-    ...webpackConf.module,
-    loaders: [
-      ...webpackConf.module.loaders,
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -29,8 +28,8 @@ module.exports = {
             }
           }
         ]
-      }
+      }jj
     ]
   },
   devtool: "source-map"
-};
+});
