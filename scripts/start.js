@@ -28,24 +28,24 @@ const webpackServePort = detect(4200, host);
 const browserSyncPort = detect(3000, host);
 
 function startServer() {
-  return Promise.all([
-    webpackServePort,
-    browserSyncPort
-  ]).then(ports => {
+  return Promise.all([webpackServePort, browserSyncPort]).then(ports => {
     serve({
+      clipboard: false,
       config,
       content: paths.src,
       add: (app, middleware, options) => {
-        app.use(koaBrowserSync({
-          init: true,
-          host,
-          files: ['src/**/*.js', 'src/**/*.scss', 'src/**/*.html'],
-          ignore: ['src/**/*.spec.js'],
-          port: ports[1],
-          proxy: `http://${host}:${ports[0]}/`,
-          reload: false,
-          single: true
-        }));
+        app.use(
+          koaBrowserSync({
+            init: true,
+            host,
+            files: ['src/**/*.js', 'src/**/*.scss', 'src/**/*.html'],
+            ignore: ['src/**/*.spec.js'],
+            port: ports[1],
+            proxy: `http://${host}:${ports[0]}/`,
+            reload: false,
+            single: true
+          })
+        );
         app.use(convert(history()));
       },
       hot: false,

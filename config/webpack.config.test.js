@@ -10,12 +10,6 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.json$/,
-        loaders: [
-          require.resolve('json-loader')
-        ]
-      },
-      {
         test: /\.js$/,
         include: paths.src,
         exclude: /node_modules/,
@@ -48,13 +42,15 @@ module.exports = {
             loader: require.resolve('babel-loader'),
             options: {
               babelrc: false,
-              presets: [{
-                ...babelrc,
-                plugins: [
-                  ...babelrc.plugins,
-                  require.resolve('babel-plugin-rewire')
-                ]
-              }],
+              presets: [
+                {
+                  ...babelrc,
+                  plugins: [
+                    ...babelrc.plugins,
+                    require.resolve('babel-plugin-rewire')
+                  ]
+                }
+              ],
               cacheDirectory: true
             }
           }
@@ -62,9 +58,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loaders: [
-          require.resolve('html-loader')
-        ]
+        loaders: [require.resolve('html-loader')]
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif)$/,
@@ -77,8 +71,7 @@ module.exports = {
       options: {
         postcss: () => [autoprefixer]
       }
-    }),
+    })
   ],
   devtool: 'source-map'
 };
-

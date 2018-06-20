@@ -13,18 +13,10 @@ const stylelintConfig = require('./stylelint.config');
 const paths = require('./paths');
 
 module.exports = {
-  mode: "development",
-  entry: path.join(paths.src, 'app', 'app.module'),
-  output: {
-    path: paths.dist,
-    filename: 'index.js'
-  },
+  mode: 'development',
+  entry: path.join(paths.src, 'app', 'app.module.js'),
   module: {
     rules: [
-      {
-        test: /\.json$/,
-        loader: require.resolve('json-loader')
-      },
       {
         test: /\.js$/,
         include: paths.src,
@@ -48,12 +40,14 @@ module.exports = {
           {
             loader: require.resolve('postcss-loader'),
             options: {
-              plugins: () => [require('autoprefixer')({
-                  'browsers': ['> 1%', 'last 2 versions']
-              })],
+              plugins: () => [
+                require('autoprefixer')({
+                  browsers: ['> 1%', 'last 2 versions']
+                })
+              ]
             }
           }
-        ],
+        ]
       },
       {
         test: /\.js$/,
@@ -79,7 +73,7 @@ module.exports = {
       }
     ]
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -95,7 +89,7 @@ module.exports = {
       config: require('./stylelint.config')
     }),
     new webpack.ProvidePlugin({
-      '$': require.resolve('jquery'),
+      $: require.resolve('jquery'),
       jQuery: require.resolve('jquery'),
       'window.jQuery': require.resolve('jquery')
     })

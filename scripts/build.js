@@ -28,12 +28,13 @@ webpack(config, (err, stats) => {
     return;
   }
 
-  console.log(stats.toString({
-    assets: true,
-    chunks: false,
-    children: false,
-    colors: true,
-    hash: false
-  }));
+  console.log(
+    stats.toString({
+      assets: true,
+      chunks: false,
+      children: false,
+      colors: true,
+      hash: false
+    })
+  );
 });
-

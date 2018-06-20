@@ -15,12 +15,6 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.json$/,
-        loaders: [
-          require.resolve('json-loader')
-        ]
-      },
-      {
         test: /\.js$/,
         include: paths.src,
         exclude: /node_modules/,
@@ -86,9 +80,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loaders: [
-          require.resolve('html-loader')
-        ]
+        loaders: [require.resolve('html-loader')]
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif)$/,
@@ -111,8 +103,8 @@ module.exports = {
       template: path.join(paths.src, 'index.html')
     }),
     new webpack.optimize.UglifyJsPlugin({
-      output: {comments: false},
-      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
+      output: { comments: false },
+      compress: { unused: true, dead_code: true, warnings: false } // eslint-disable-line camelcase
     }),
     new ExtractTextPlugin('index-[contenthash].css'),
     new webpack.LoaderOptionsPlugin({
@@ -121,7 +113,7 @@ module.exports = {
       }
     }),
     new webpack.ProvidePlugin({
-      '$': require.resolve('jquery'),
+      $: require.resolve('jquery'),
       jQuery: require.resolve('jquery'),
       'window.jQuery': require.resolve('jquery')
     })
@@ -130,6 +122,5 @@ module.exports = {
     path: paths.dist,
     filename: '[name]-[hash].js'
   },
-  entry:  path.join(paths.src, 'app', 'app.module')
+  entry: path.join(paths.src, 'app', 'app.module')
 };
-
